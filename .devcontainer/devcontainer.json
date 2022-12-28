@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
-	"image": "mcr.microsoft.com/devcontainers/universal:2.0.6-focal",
+	"image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
 	"remoteUser": "codespace",
 	"containerUser": "codespace",
 	"customizations": {
