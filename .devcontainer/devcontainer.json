@@ -1,0 +1,33 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
+{
+	"image": "mcr.microsoft.com/devcontainers/universal:2.0.6-focal",
+	"remoteUser": "codespace",
+	"containerUser": "codespace",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"Oracle.oracledevtools",
+				"ms-mssql.sql-bindings-vscode",
+				"ms-mssql.mssql",
+				"ms-mssql.sql-database-projects-vscode",
+				"ms-ossdata.vscode-postgresql"
+			]
+		}
+	}
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "uname -a",
+
+	// Configure tool-specific properties.
+	// "customizations": {},
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}
