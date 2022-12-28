@@ -1,7 +1,10 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
-	"image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
+    "build": {
+        "dockerfile": "./Dockerfile",
+        "context": "."
+    },
 	"features": {
 		"ghcr.io/devcontainers/features/common-utils:1": {
 			"installZsh": "true",
