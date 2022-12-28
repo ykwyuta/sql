@@ -14,19 +14,7 @@
 			"upgradePackages": "true"
 		}
 	},
-	"remoteUser": "vscode",
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"Oracle.oracledevtools",
-				"ms-mssql.sql-bindings-vscode",
-				"ms-mssql.mssql",
-				"ms-mssql.sql-database-projects-vscode",
-				"ms-ossdata.vscode-postgresql"
-			]
-		}
-	}
-
+	"remoteUser": "vscode"
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
 
