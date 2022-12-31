@@ -32,3 +32,4 @@ devcontainerからSQL Serverに接続する場合は以下
 | SELECT c.pcol1 FROM test2022 p INNER JOIN test2022c c ON p.col1 = c.pcol1 WHERE ccol3 = 10 | 102.sqlplan |
 | SELECT c.pcol1 FROM test2022 p INNER JOIN test2022c c ON p.col1 = c.pcol1 WHERE ccol2 = 10 | 103.sqlplan |
 | SELECT c.pcol1 FROM test2022 p INNER JOIN test2022c c ON p.col1 = c.pcol1 WHERE DAY(p.col9) = 10 | 104.sqlplan |
+| ALTER TABLE test2022 ADD col10 AS DAY(col9) PERSISTED;<br />CREATE INDEX idx_test2022_col10 ON test2022 (col10);<br />SELECT c.pcol1 FROM test2022 p INNER JOIN test2022c c ON p.col1 = c.pcol1 WHERE DAY(p.col9) = 10; | 105.sqlplan |
