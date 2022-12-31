@@ -1,4 +1,6 @@
 DROP TABLE IF EXISTS test2022;
+DROP TABLE IF EXISTS test2022c;
+
 CREATE TABLE test2022 (
 	col1 INT,
 	col2 INT,
@@ -32,3 +34,23 @@ DATEADD(DAY, f.id, '2022-12-27 00:00') AS col9
 FROM(SELECT TOP(10 * 10000) ROW_NUMBER() OVER (ORDER BY o.object_id) AS id FROM sys.objects o, sys.objects o1, sys.objects o2) f;
 
 UPDATE STATISTICS test2022;
+
+CREATE TABLE test2022c (
+	pcol1 INT,
+	ccol1 INT,
+	ccol2 INT,
+	ccol3 INT,
+	CONSTRAINT pk_test2022c PRIMARY KEY(pcol1, ccol1)
+)
+
+CREATE INDEX idx_test2022c_ccol2 ON test2022c(ccol2);
+
+INSERT INTO test2022c (pcol1, ccol1, ccol2, ccol3)
+SELECT 
+col1 AS pcol1, 
+ROW_NUMBER() OVER (PARTITION BY f.col1 ORDER BY t) AS ccol1,
+f.t AS ccol2,
+f.col3 AS ccol3
+FROM (SELECT * FROM test2022, (SELECT TOP 10 col1 AS t FROM test2022 ORDER BY col1) c) f
+
+UPDATE STATISTICS test2022c;
