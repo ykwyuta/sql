@@ -22,3 +22,12 @@ devcontainerからSQL Serverに接続する場合は以下
 | 先頭列だが選択性が低い＋キー列              | SELECT col8 FROM test2022 WHERE col5 = 1                     | 008.sqlplan |
 | 日付暗黙型変換キー列                        | SELECT col9 FROM test2022 WHERE col9 = '2025-03-07 00:00:00.000' | 009.sqlplan |
 | 先頭列ではないキー列                        | SELECT col5 FROM test2022 WHERE col8 = '2025-03-07 00:00:00.000' | 010.sqlplan |
+
+おまけ
+
+| SQL                                                          | 実行計画    |
+| ------------------------------------------------------------ | ----------- |
+| SELECT p.* FROM test2022 p INNER JOIN test2022c c ON p.col1 = c.pcol1 WHERE ccol3 = 10 | 100.sqlplan |
+| SELECT c.* FROM test2022 p INNER JOIN test2022c c ON p.col1 = c.pcol1 WHERE ccol3 = 10 | 101.sqlplan |
+| SELECT c.pcol1 FROM test2022 p INNER JOIN test2022c c ON p.col1 = c.pcol1 WHERE ccol3 = 10 | 102.sqlplan |
+| SELECT c.pcol1 FROM test2022 p INNER JOIN test2022c c ON p.col1 = c.pcol1 WHERE ccol2 = 10 | 103.sqlplan |
