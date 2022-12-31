@@ -31,3 +31,4 @@ devcontainerからSQL Serverに接続する場合は以下
 | SELECT c.* FROM test2022 p INNER JOIN test2022c c ON p.col1 = c.pcol1 WHERE ccol3 = 10 | 101.sqlplan |
 | SELECT c.pcol1 FROM test2022 p INNER JOIN test2022c c ON p.col1 = c.pcol1 WHERE ccol3 = 10 | 102.sqlplan |
 | SELECT c.pcol1 FROM test2022 p INNER JOIN test2022c c ON p.col1 = c.pcol1 WHERE ccol2 = 10 | 103.sqlplan |
+| SELECT c.pcol1 FROM test2022 p INNER JOIN test2022c c ON p.col1 = c.pcol1 WHERE DAY(p.col9) = 10 | 104.sqlplan |
