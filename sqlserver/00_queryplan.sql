@@ -40,17 +40,21 @@ CREATE TABLE test2022c (
 	ccol1 INT,
 	ccol2 INT,
 	ccol3 INT,
+	ccol4 INT,
 	CONSTRAINT pk_test2022c PRIMARY KEY(pcol1, ccol1)
 )
 
 CREATE INDEX idx_test2022c_ccol2 ON test2022c(ccol2);
 
-INSERT INTO test2022c (pcol1, ccol1, ccol2, ccol3)
+CREATE INDEX idx_test2022c_ccol3 ON test2022c(ccol3);
+
+INSERT INTO test2022c (pcol1, ccol1, ccol2, ccol3, ccol4)
 SELECT 
 col1 AS pcol1, 
 ROW_NUMBER() OVER (PARTITION BY f.col1 ORDER BY t) AS ccol1,
 f.t AS ccol2,
-f.col3 AS ccol3
+ROW_NUMBER() OVER (ORDER BY t) AS ccol3,
+f.col3 AS ccol4
 FROM (SELECT * FROM test2022, (SELECT TOP 10 col1 AS t FROM test2022 ORDER BY col1) c) f
 
 UPDATE STATISTICS test2022c;
