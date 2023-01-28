@@ -5,7 +5,7 @@ CREATE TABLE store (
 	store_id INT,
 	name NVARCHAR(20) NOT NULL,
 	is_deleted TINYINT NOT NULL DEFAULT 0,
-	CONSTRAINT pk_stock PRIMARY KEY(store_id)
+	CONSTRAINT pk_store PRIMARY KEY(store_id)
 );
 
 INSERT INTO store (store_id, name, is_deleted)
@@ -56,3 +56,25 @@ i.item_id,
 DATEADD(DAY, f.id, i.rgdt) AS startdt,
 DATEADD(DAY, f.id + 5, i.rgdt) AS enddt
 FROM item i, (SELECT TOP(100) ROW_NUMBER() OVER (ORDER BY o.object_id) AS id FROM sys.objects o) f
+
+CREATE TABLE stock (
+    stock_id INT,
+	item_id INT NOT NULL,
+	priority INT NOT NULL,
+	delivery INT NOT NULL,
+	stock INT NOT NULL,
+	rgdt DATETIME NOT NULL,
+	updt DATETIME NOT NULL
+	CONSTRAINT pk_stock PRIMARY KEY(stock_id)
+);
+
+INSERT INTO stock (stock_id, item_id, priority, delivery, stock, rgdt, updt)
+SELECT
+ROW_NUMBER() OVER (ORDER BY f.id) AS stock_id,
+i.item_id,
+f.id AS priority,
+(item_id + f.id) % 15 AS delivery,
+(item_id + f.id) % 100 AS stock,
+i.rgdt AS rgdt,
+DATEADD(DAY, f.id + 5, i.rgdt) AS updt
+FROM item i, (SELECT TOP(4) ROW_NUMBER() OVER (ORDER BY o.object_id) AS id FROM sys.objects o) f
