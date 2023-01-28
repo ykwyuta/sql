@@ -13,6 +13,8 @@ f.id, 'STORE ' + CHAR(f.id % 26 + 65), CASE f.id % 8 WHEN 0 THEN 1 ELSE 0 END
 FROM(SELECT TOP(10 * 10000) ROW_NUMBER() OVER (ORDER BY o.object_id) AS id FROM sys.objects o, sys.objects o1, sys.objects o2) f
 WHERE f.id < 27;
 
+UPDATE STATISTICS store;
+
 DROP TABLE IF EXISTS item;
 
 CREATE TABLE item (
@@ -37,6 +39,8 @@ DATEADD(HOUR, f.id, '2021-12-27 00:00') AS updt,
 CASE f.id % 8 WHEN 0 THEN 1 ELSE 0 END AS is_deleted
 FROM(SELECT TOP(10 * 10000) ROW_NUMBER() OVER (ORDER BY o.object_id) AS id FROM sys.objects o, sys.objects o1, sys.objects o2) f
 
+UPDATE STATISTICS item;
+
 DROP TABLE IF EXISTS price;
 
 CREATE TABLE price (
@@ -56,6 +60,8 @@ i.item_id,
 DATEADD(DAY, f.id, i.rgdt) AS startdt,
 DATEADD(DAY, f.id + 5, i.rgdt) AS enddt
 FROM item i, (SELECT TOP(100) ROW_NUMBER() OVER (ORDER BY o.object_id) AS id FROM sys.objects o) f
+
+UPDATE STATISTICS price;
 
 DROP TABLE IF EXISTS stock;
 
@@ -80,3 +86,5 @@ f.id AS priority,
 i.rgdt AS rgdt,
 DATEADD(DAY, f.id + 5, i.rgdt) AS updt
 FROM item i, (SELECT TOP(4) ROW_NUMBER() OVER (ORDER BY o.object_id) AS id FROM sys.objects o) f
+
+UPDATE STATISTICS stock;
